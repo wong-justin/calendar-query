@@ -1,0 +1,6 @@
+env/
+auth/
+misc/
+*.bat
+
+__pycache__/
