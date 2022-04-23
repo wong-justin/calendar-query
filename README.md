@@ -2,28 +2,27 @@
 
 Retrieve and filter events from Google calendar on the command line.
 
+## Examples
+
+```
+cli.py 2021 2021-02 -id ministry
+
+cli.py "2022-04-14 09:00" 2022-04-15 -n 1
+
+cli.py 2022 2026 -has memorial
+```
+
+1. Get events on calendar named "Ministry" for Jan 2021
+
+2. Get next event after 9 AM on Apr 14
+
+3. Get all events from 2022 to 2026 with titles containing "memorial"
+
 ## Installation
 
 Short story: You need to setup and save credentials from Google's Calendar API.
 
 Long story: TODO
-
-## Examples
-
-Get next event after 9 AM on Apr 14:
-```
-cli.py "2022-04-14 09:00" 2022-04-15 -n 1
-```
-
-Get events on calendar named "Ministry" for Jan 2021:
-```
-cli.py 2021 2021-02 -id ministry
-```
-
-Get all events from 2022 to 2026 with titles containing "memorial":
-```
-cli.py 2022 2026 -has memorial
-```
 
 ## Usage
 
