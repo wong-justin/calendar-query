@@ -53,6 +53,9 @@ class CalendarAPI:
     # wrapping ugly api auth setup as a context manager
 
     SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
+    script_dir = Path(__file__).parent
+    credentials_path = str( script_dir / 'auth/credentials.json' )
+    token_path = str( script_dir / 'auth/token.json' )
 
     def __enter__(self):
         try:
@@ -67,7 +70,7 @@ class CalendarAPI:
             elif not creds or not creds.valid:
                 # possible cases: first time use. or google password changed.
                 flow = InstalledAppFlow.from_client_secrets_file(
-                    'auth/credentials.json',
+                    self.credentials_path,
                     self.SCOPES)
                 creds = flow.run_local_server(port=0)
                 self.save_credentials(creds)
@@ -87,13 +90,13 @@ class CalendarAPI:
         pass
 
     def save_credentials(self, creds):
-        with open('auth/token.json', 'w') as file:
+        with open(self.token_path, 'w') as file:
             file.write(creds.to_json())
 
     def read_credentials(self):
         return (
-            Credentials.from_authorized_user_file('auth/token.json', self.SCOPES)
-            if Path('auth/token.json').exists()
+            Credentials.from_authorized_user_file(self.token_path, self.SCOPES)
+            if Path(self.token_path).exists()
             else None
         )
 
